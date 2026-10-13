@@ -509,7 +509,18 @@ class NativeScannerTests(unittest.TestCase):
             self.commit(repo)
             self.git(repo, "checkout", "-q", "feature")
             merged = subprocess.run(
-                ["git", "-C", str(repo), "merge", "side", "--no-commit"],
+                [
+                    "git",
+                    "-c",
+                    "user.name=Unit",
+                    "-c",
+                    "user.email=unit@example.invalid",
+                    "-C",
+                    str(repo),
+                    "merge",
+                    "side",
+                    "--no-commit",
+                ],
                 capture_output=True,
                 check=False,
             )
